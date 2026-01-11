@@ -1,48 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>AssetOps</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .box {
-      text-align: center;
-      max-width: 600px;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #00e676;
-    }
-    p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
-  </style>
-</head>
-<body>
-  <div class="box">
-    <h1>AssetOps</h1>
-    <p>AI-ready Asset Management Platform</p>
-    <p>Ground Support Equipment • Trucking • Aviation MRO</p>
-    <footer>
-      © 2026 AssetOps.ca
-    </footer>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AssetOps | AI-ready Asset Management Platform</title>
+    <meta
+      name="description"
+      content="AssetOps is an AI-ready asset management platform for Ground Support Equipment, Trucking fleets, and Aviation MRO. Real-time IoT tracking, preventive and predictive maintenance, and ISO-ready compliance."
+    />
+    <style>
+      :root {
+        --bg: #0b0b0b;
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel2: rgba(255, 255, 255, 0.04);
+        --text: #e8e8e8;
+        --muted: #bdbdbd;
+        --accent: #00d26a;
+        --border: rgba(255, 255, 255, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: radial-gradient(1200px 600px at 50% 0%, rgba(0, 210, 106, 0.12), transparent 60%),
+          var(--bg);
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 18px;
+      }
+
+      /* Top Nav */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(10px);
+        background: rgba(11, 11, 11, 0.6);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 20px rgba(0, 210, 106, 0.6);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .nav-links a {
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
+
+      .nav-links a:hover {
+        background: var(--panel);
+        color: var(--text);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+        background: var(--accent);
+        color: #041b10;
+        border: 1px solid rgba(0, 210, 106, 0.35);
+      }
+
+      .cta:hover {
+        filter: brightness(1.05);
+      }
+
+      /* Hero */
+      .hero {
+        padding: 70px 0 40px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 26px;
+        align-items: center;
+      }
+
+      .h1 {
+        font-size: 48px;
+        line-height: 1.1;
+        margin: 0 0 12px;
+        letter-spacing: -0.8px;
+      }
+
+      .sub {
+        font-size: 18px;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0 0 18px;
+      }
+
+      .pill-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 18px 0 0;
+      }
+
+      .pill {
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        padding: 8px 10px;
+        border-radius: 999px;
+      }
+
+      .hero-card {
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      .card-title {
+        font-weight: 800;
+        margin: 0 0 10px;
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .kpi {
+        border: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 16px;
+        padding: 12px;
+      }
+
+      .kpi b {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 4px;
+        color: var(--accent);
+      }
+
+      .kpi span {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      /* Sections */
+      .section {
+        padding: 38px 0;
+      }
+
+      .section h2 {
+        margin: 0 0 10px;
+        font-size: 26px;
+      }
+
+      .section p.lead {
+        margin: 0 0 18px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .box {
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        border-radius: 18px;
+        padding: 16px;
+        min-height: 130px;
+      }
+
+      .box h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
+      .box p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .callout {
+        border: 1px solid rgba(0, 210, 106, 0.25);
+        background: rgba(0, 210, 106, 0.06);
+        border-radius: 18px;
+        padding: 16px;
+      }
+
+      /* Footer */
+      .footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 0;
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 10px;
+      }
+
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .h1 {
+          font-size: 38px;
+        }
+        .grid3 {
+          grid-template-columns: 1fr;
+        }
+        .two {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <div class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="#top">
+          <span class="brand-dot"></span>
+          <span>AssetOps</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#platform">Platform</a>
+          <a href="#industries">Industries</a>
+          <a href="#features">Features</a>
+          <a href="#contact">Contact</a>
+          <a class="cta" href="#contact">Request Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div id="top" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1 class="h1">AI-ready Asset Management Platform</h1>
+          <p class="sub">
+            Built for <b>Ground Support Equipment</b>, <b>Trucking fleets</b>, and <b>Aviation MRO</b>.
+            Real-time tracking, preventive + predictive maintenance, and ISO-ready operations.
+          </p>
+
+          <div style="display:flex; gap:12px; flex-wrap: wrap; margin-top: 16px;">
+            <a class="cta" href="#contact">Request Demo</a>
+            <a
+              href="#platform"
+              style="display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background: var(--panel2); color: var(--text); font-weight:700;"
+            >
+              Explore Platform
+            </a>
+          </div>
+
+          <div class="pill-row">
+            <span class="pill">IoT + Edge Devices</span>
+            <span class="pill">Predictive Maintenance</span>
+            <span class="pill">Compliance & Audit Trails</span>
+            <span class="pill">Azure-ready</span>
+            <span class="pill">Microservices-ready</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <p class="card-title">What AssetOps delivers</p>
+          <div class="kpis">
+            <div class="kpi">
+              <b>Realtime</b>
+              <span>Telemetry + status, location, hours, health</span>
+            </div>
+            <div class="kpi">
+              <b>Preventive</b>
+              <span>Service schedules, inspections, parts, checklists</span>
+            </div>
+            <div class="kpi">
+              <b>Predictive</b>
+              <span>AI signals to prevent breakdowns before they occur</span>
+            </div>
+            <div class="kpi">
+              <b>ISO-ready</b>
+              <span>Logs, traceability, controls, audit-friendly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLATFORM -->
+    <div id="platform" class="section">
+      <div class="container">
+        <h2>Platform Overview</h2>
+        <p class="lead">
+          AssetOps unifies assets, work orders, telemetry, compliance, and analytics into one platform.
+          Start with a lightweight rollout and scale to full digital operations.
+        </p>
+
+        <div class="two">
+          <div class="box">
+            <h3>Core Modules</h3>
+            <p>
+              Asset Registry • Work Orders • Preventive Maintenance • Inspections • Inventory/Parts •
+              Vendors • Users/RBAC • Audit logs
+            </p>
+          </div>
+          <div class="box">
+            <h3>IoT + Integrations</h3>
+            <p>
+              GPS/OBD/CAN • Sensors • Fuel/Engine Hours • API integrations • Data imports • Alerts •
+              Edge gateways for poor connectivity environments
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INDUSTRIES -->
+    <div id="industries" class="section">
+      <div class="container">
+        <h2>Industries</h2>
+        <p class="lead">A single platform, configured for three operational worlds.</p>
+
+        <div class="grid3">
+          <div class="box">
+            <h3>Ground Support Equipment (GSE)</h3>
+            <p>
+              Tow tractors, GPUs, loaders, tugs, de-icers. Track utilization, gate response, battery/engine health,
+              and automate inspections & preventive maintenance.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Trucking & Fleet</h3>
+            <p>
+              Trucks, trailers, forklifts. Driver/vehicle events, mileage, service cycles, compliance logs,
+              and predictive downtime reduction.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Aviation MRO</h3>
+            <p>
+              Tools, ground assets, components. Work packages, inspection traceability, parts accountability,
+              and audit-ready documentation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div id="features" class="section">
+      <div class="container">
+        <h2>Key Features</h2>
+        <p class="lead">Designed to be future AI-ready and enterprise-grade from day one.</p>
+
+        <div class="grid3">
+          <div class="box">
+            <h3>Smart Alerts</h3>
+            <p>Thresholds, fault codes, abnormal behavior, missed inspections, overdue maintenance.</p>
+          </div>
+          <div class="box">
+            <h3>Analytics Dashboard</h3>
+            <p>Utilization, downtime, maintenance cost, MTBF/MTTR, fleet health scoring.</p>
+          </div>
+          <div class="box">
+            <h3>ISO & Audit Controls</h3>
+            <p>Change logs, role-based access, approvals, traceability, evidence capture.</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:14px;">
+          <b style="color: var(--accent);">Next:</b>
+          <span style="color: var(--muted);">
+            We can evolve this from a static site into a full React + .NET microservices platform on Azure,
+            with containerization, CI/CD, and a real product roadmap.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <p class="lead">
+          For demos, partnerships, and pilots: email us and we’ll respond quickly.
+        </p>
+
+        <div class="two">
+          <div class="box">
+            <h3>Email</h3>
+            <p>
+              <a href="mailto:info@assetops.ca" style="color: var(--accent); font-weight: 800;">info@assetops.ca</a><br />
+              (You can change this to your real email anytime)
+            </p>
+          </div>
+
+          <div class="box">
+            <h3>What to include</h3>
+            <p>
+              Industry (GSE/Trucking/MRO), asset count, location(s), and what you want to improve
+              (downtime, compliance, maintenance cost, realtime tracking).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="container footer-row">
+        <div>© <span id="y"></span> AssetOps.ca</div>
+        <div>AI-ready • ISO-ready • Azure-ready</div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
