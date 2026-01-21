@@ -2,19 +2,53 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
 
 jobs:
-  deploy:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
+    name: Build and Deploy
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
+          lfs: false
 
+      # Deploy the already-built static content from repo root.
+      # (For pure static sites, set skip_app_build=true and output_location="")
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
+          # IMPORTANT: This secret must contain the deployment token from the SAME SWA resource.
+          # For swa-assetops-prod, regenerate/copy token from that SWA and paste into this secret.
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ASHY_MUSHROOM_033DA631E }}
           action: "upload"
-          app_location: "/"          # repo root
-          output_location: ""        # nothing to build; deploy static files as-is
+
+          # Repo root contains index.html and assets (your static site)
+          app_location: "/"
+
+          # No Azure Functions API in this repo
+          api_location: ""
+
+          # For static sites (no build), keep output_location empty
+          output_location: ""
+
+          # Skip build step (we are uploading static files already in the repo)
           skip_app_build: true
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ASHY_MUSHROOM_033DA631E }}
+          action: "close"
