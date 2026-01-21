@@ -13,27 +13,15 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="AssetOps" />
-
-    <!-- Helpful meta -->
-    <meta name="application-name" content="AssetOps" />
-    <meta name="apple-mobile-web-app-title" content="AssetOps" />
-    <meta name="format-detection" content="telephone=no" />
-
-    <!-- Canonical -->
     <link rel="canonical" href="https://www.assetops.ca/" />
 
-    <!-- Favicons & App Icons (relative is safe everywhere; works on Azure too) -->
-    <link rel="icon" href="./favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
-
-    <!-- PWA -->
-    <link rel="manifest" href="./site.webmanifest" />
+    <!-- Favicons & App Icons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#00d26a" />
-
-    <!-- Preload hero/banner image for faster paint -->
-    <link rel="preload" as="image" href="./og-image.png" />
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />
@@ -42,7 +30,7 @@
     <meta property="og:title" content="AssetOps | AI-ready Asset Management Platform" />
     <meta
       property="og:description"
-      content="AssetOps for GSE, Trucking fleets, and Aviation MRO: real-time tracking, preventive & predictive maintenance, and ISO-ready operations."
+      content="AssetOps for GSE, Trucking fleets, and Aviation MRO: real-time visibility, preventive & predictive maintenance, and audit-ready operations."
     />
     <meta property="og:image" content="https://www.assetops.ca/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -54,7 +42,7 @@
     <meta name="twitter:title" content="AssetOps | AI-ready Asset Management Platform" />
     <meta
       name="twitter:description"
-      content="AI-ready platform for GSE, Trucking, and Aviation MRO with realtime tracking, preventive and predictive maintenance, and ISO-ready operations."
+      content="AI-ready platform for GSE, Trucking, and Aviation MRO with real-time tracking, preventive & predictive maintenance, and ISO-ready operations."
     />
     <meta name="twitter:image" content="https://www.assetops.ca/og-image.png" />
 
@@ -69,58 +57,24 @@
         --border: rgba(255, 255, 255, 0.12);
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
 
       body {
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
-        background: radial-gradient(
-            1200px 600px at 50% 0%,
-            rgba(0, 210, 106, 0.12),
-            transparent 60%
-          ),
+        background:
+          radial-gradient(1200px 600px at 50% 0%, rgba(0, 210, 106, 0.12), transparent 60%),
           var(--bg);
         color: var(--text);
       }
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      a:focus-visible,
-      button:focus-visible {
-        outline: 2px solid rgba(0, 210, 106, 0.85);
-        outline-offset: 2px;
-        border-radius: 10px;
-      }
+      a { color: inherit; text-decoration: none; }
 
       .container {
         max-width: 1100px;
         margin: 0 auto;
         padding: 0 18px;
-      }
-
-      /* Skip link (accessibility) */
-      .skip {
-        position: absolute;
-        left: -999px;
-        top: 10px;
-        background: #0b0b0b;
-        border: 1px solid var(--border);
-        padding: 10px 12px;
-        border-radius: 12px;
-        color: var(--text);
-        z-index: 1000;
-      }
-      .skip:focus {
-        left: 12px;
       }
 
       /* Top Nav */
@@ -134,20 +88,21 @@
       }
 
       .nav-inner {
-        height: 64px;
+        min-height: 64px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 16px;
+        padding: 10px 0;
       }
 
       .brand {
         display: flex;
-        gap: 12px;
         align-items: center;
-        font-weight: 800;
+        gap: 12px;
+        font-weight: 900;
         letter-spacing: 0.2px;
-        min-width: 240px;
+        min-width: 260px;
       }
 
       .brand-logo {
@@ -156,7 +111,7 @@
         border-radius: 12px;
         border: 1px solid rgba(0, 210, 106, 0.18);
         background: rgba(255, 255, 255, 0.03);
-        box-shadow: 0 0 22px rgba(0, 210, 106, 0.1);
+        box-shadow: 0 0 22px rgba(0, 210, 106, 0.10);
         object-fit: cover;
         flex: 0 0 auto;
       }
@@ -165,12 +120,12 @@
         height: 26px;
         width: auto;
         display: block;
-        filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
       }
 
       .nav-links {
         display: flex;
-        gap: 16px;
+        gap: 12px;
         align-items: center;
         font-size: 14px;
         color: var(--muted);
@@ -194,20 +149,16 @@
         gap: 8px;
         padding: 10px 14px;
         border-radius: 12px;
-        font-weight: 800;
+        font-weight: 900;
         background: var(--accent);
         color: #041b10;
         border: 1px solid rgba(0, 210, 106, 0.35);
       }
 
-      .cta:hover {
-        filter: brightness(1.05);
-      }
+      .cta:hover { filter: brightness(1.05); }
 
       /* Hero */
-      .hero {
-        padding: 70px 0 40px;
-      }
+      .hero { padding: 70px 0 40px; }
 
       .hero-grid {
         display: grid;
@@ -246,13 +197,16 @@
         border-radius: 999px;
       }
 
+      .mini {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
       .hero-card {
         border: 1px solid var(--border);
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.06),
-          rgba(255, 255, 255, 0.03)
-        );
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
         border-radius: 18px;
         padding: 18px;
       }
@@ -299,19 +253,7 @@
       }
 
       /* Sections */
-      .section {
-        padding: 38px 0;
-      }
-
-      /* Prevent sticky header from covering section headings when using #anchors */
-      #platform,
-      #industries,
-      #usecases,
-      #features,
-      #security,
-      #contact {
-        scroll-margin-top: 84px;
-      }
+      .section { padding: 38px 0; }
 
       .section h2 {
         margin: 0 0 10px;
@@ -327,6 +269,12 @@
       .grid3 {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 14px;
       }
 
@@ -350,24 +298,11 @@
         font-size: 14px;
       }
 
-      .two {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-      }
-
       .callout {
         border: 1px solid rgba(0, 210, 106, 0.25);
         background: rgba(0, 210, 106, 0.06);
         border-radius: 18px;
         padding: 16px;
-      }
-
-      .mini {
-        margin-top: 10px;
-        font-size: 12px;
-        color: var(--muted);
-        line-height: 1.5;
       }
 
       /* Footer */
@@ -381,7 +316,6 @@
 
       .footer-row {
         display: flex;
-        justify-content Some characters were cut off earlier; corrected below:
         justify-content: space-between;
         gap: 12px;
         flex-wrap: wrap;
@@ -389,38 +323,22 @@
 
       /* Responsive */
       @media (max-width: 900px) {
-        .hero-grid {
-          grid-template-columns: 1fr;
-        }
-        .h1 {
-          font-size: 38px;
-        }
-        .grid3 {
-          grid-template-columns: 1fr;
-        }
-        .two {
-          grid-template-columns: 1fr;
-        }
-        .nav-inner {
-          height: auto;
-          padding: 12px 0;
-        }
-        .brand {
-          min-width: unset;
-        }
+        .hero-grid { grid-template-columns: 1fr; }
+        .h1 { font-size: 38px; }
+        .grid3 { grid-template-columns: 1fr; }
+        .two { grid-template-columns: 1fr; }
+        .brand { min-width: unset; }
       }
     </style>
   </head>
 
   <body>
-    <a class="skip" href="#main">Skip to content</a>
-
     <!-- NAV -->
     <div class="nav">
       <div class="container nav-inner">
         <a class="brand" href="#top" aria-label="AssetOps home">
-          <img class="brand-logo" src="./apple-touch-icon.png" alt="AssetOps logo" />
-          <img class="brand-wordmark" src="./AssetOps2.png" alt="AssetOps" />
+          <img class="brand-logo" src="/apple-touch-icon.png" alt="AssetOps logo" />
+          <img class="brand-wordmark" src="/AssetOps2.png" alt="AssetOps" />
         </a>
 
         <div class="nav-links">
@@ -435,257 +353,256 @@
       </div>
     </div>
 
-    <main id="main">
-      <!-- HERO -->
-      <div id="top" class="hero">
-        <div class="container hero-grid">
-          <div>
-            <h1 class="h1">AI-ready Asset Management Platform</h1>
-            <p class="sub">
-              Built for <b>Ground Support Equipment (GSE)</b>, <b>Trucking & Fleet</b>, and <b>Aviation MRO</b>.
-              Reduce downtime, standardize maintenance, and stay audit-ready with complete asset traceability.
+    <!-- HERO -->
+    <div id="top" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1 class="h1">AI-ready Asset Management Platform</h1>
+          <p class="sub">
+            Built for <b>Ground Support Equipment (GSE)</b>, <b>Trucking & Fleet</b>, and <b>Aviation MRO</b>.
+            Reduce downtime, standardize maintenance, and stay audit-ready with complete asset traceability.
+          </p>
+
+          <div style="display:flex; gap:12px; flex-wrap: wrap; margin-top: 16px;">
+            <a class="cta" href="#contact">Request Demo</a>
+            <a
+              href="#platform"
+              style="display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background: var(--panel2); color: var(--text); font-weight:900;"
+            >
+              Explore Platform
+            </a>
+          </div>
+
+          <div class="pill-row">
+            <span class="pill">Asset Registry</span>
+            <span class="pill">Work Orders</span>
+            <span class="pill">PM Schedules</span>
+            <span class="pill">Telemetry + Alerts</span>
+            <span class="pill">Audit Trails</span>
+            <span class="pill">Azure-ready</span>
+          </div>
+
+          <div class="mini">
+            Start small: Registry + Work Orders → add PM + inspections → integrate telematics → unlock predictive insights.
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img class="hero-banner" src="/og-image.png" alt="AssetOps AI-ready Asset Management Platform" />
+          <p class="card-title">What AssetOps delivers</p>
+
+          <div class="kpis">
+            <div class="kpi">
+              <b>Realtime</b>
+              <span>Location, hours, mileage, status, fault signals</span>
+            </div>
+            <div class="kpi">
+              <b>Preventive</b>
+              <span>PM schedules, inspections, checklists, parts</span>
+            </div>
+            <div class="kpi">
+              <b>Predictive</b>
+              <span>Early warnings to prevent breakdowns & delays</span>
+            </div>
+            <div class="kpi">
+              <b>ISO-ready</b>
+              <span>Approvals, evidence capture, immutable audit logs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLATFORM -->
+    <div id="platform" class="section">
+      <div class="container">
+        <h2>Platform Overview</h2>
+        <p class="lead">
+          AssetOps unifies assets, work orders, telemetry, compliance, and analytics into one operational system.
+          Standardize processes across sites and scale from a pilot to enterprise operations.
+        </p>
+
+        <div class="two">
+          <div class="box">
+            <h3>Operations (Day-to-day)</h3>
+            <p>
+              Asset Registry • Work Orders • Maintenance Plans • Scheduling • Inspections/Checklists •
+              Defect reporting • Evidence capture (photos, readings, signatures)
             </p>
-
-            <div style="display:flex; gap:12px; flex-wrap: wrap; margin-top: 16px;">
-              <a class="cta" href="#contact">Request Demo</a>
-              <a
-                href="#platform"
-                style="display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background: var(--panel2); color: var(--text); font-weight:800;"
-              >
-                Explore Platform
-              </a>
-            </div>
-
-            <div class="pill-row">
-              <span class="pill">Asset Registry</span>
-              <span class="pill">Work Orders</span>
-              <span class="pill">PM Schedules</span>
-              <span class="pill">Telemetry + Alerts</span>
-              <span class="pill">Audit Trails</span>
-              <span class="pill">Azure-ready</span>
-            </div>
-
-            <div class="mini">
-              Start small: Registry + Work Orders → add PM + inspections → integrate telematics → unlock predictive insights.
-            </div>
+            <p class="mini">
+              Designed for busy ramps and shops: fast workflows, minimal clicks, and high traceability.
+            </p>
           </div>
 
-          <div class="hero-card">
-            <img class="hero-banner" src="./og-image.png" alt="AssetOps AI-ready Asset Management Platform" />
-            <p class="card-title">What AssetOps delivers</p>
-            <div class="kpis">
-              <div class="kpi">
-                <b>Realtime</b>
-                <span>Location, hours, mileage, status, fault signals</span>
-              </div>
-              <div class="kpi">
-                <b>Preventive</b>
-                <span>PM schedules, inspections, checklists, parts</span>
-              </div>
-              <div class="kpi">
-                <b>Predictive</b>
-                <span>Early warnings to prevent breakdowns & delays</span>
-              </div>
-              <div class="kpi">
-                <b>ISO-ready</b>
-                <span>Approvals, evidence capture, immutable audit logs</span>
-              </div>
-            </div>
+          <div class="box">
+            <h3>Data + Integrations</h3>
+            <p>
+              GPS/OBD/CAN • Telematics providers • CSV imports • APIs • Alerts •
+              Power BI/Reporting • Edge gateways for low-connectivity environments
+            </p>
+            <p class="mini">
+              Import fleet lists, serials, locations, vendors, and historical work orders—then grow into real-time operations.
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- PLATFORM -->
-      <div id="platform" class="section">
-        <div class="container">
-          <h2>Platform Overview</h2>
-          <p class="lead">
-            AssetOps unifies assets, work orders, telemetry, compliance, and analytics into one operational system.
-            Standardize processes across sites and scale from a pilot to enterprise operations.
-          </p>
+    <!-- INDUSTRIES -->
+    <div id="industries" class="section">
+      <div class="container">
+        <h2>Industries</h2>
+        <p class="lead">One platform, configured for three operational worlds.</p>
 
-          <div class="two">
-            <div class="box">
-              <h3>Operations (Day-to-day)</h3>
-              <p>
-                Asset Registry • Work Orders • Maintenance Plans • Scheduling • Inspections/Checklists •
-                Defect reporting • Evidence capture (photos, readings, signatures)
-              </p>
-              <p class="mini">
-                Designed for busy ramps and shops: fast workflows, minimal clicks, and high traceability.
-              </p>
-            </div>
-
-            <div class="box">
-              <h3>Data + Integrations</h3>
-              <p>
-                GPS/OBD/CAN • Telematics providers • CSV imports • APIs • Alerts •
-                Power BI/Reporting • Edge gateways for low-connectivity environments
-              </p>
-              <p class="mini">
-                Bring your data: fleet lists, asset types, serials, locations, vendor catalogs, historical work orders.
-              </p>
-            </div>
+        <div class="grid3">
+          <div class="box">
+            <h3>Ground Support Equipment (GSE)</h3>
+            <p>
+              Tow tractors, GPUs, loaders, belt loaders, tugs, de-icers. Track utilization, gate response,
+              battery/engine health, and automate daily inspections & preventive maintenance.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Trucking & Fleet</h3>
+            <p>
+              Trucks, trailers, yard equipment, forklifts. Mileage and service cycles, compliance logs,
+              driver/vehicle events, and predictive downtime reduction.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Aviation MRO</h3>
+            <p>
+              Tools, ground assets, rotable components. Work packages, inspection traceability,
+              parts accountability, calibration tracking, and audit-ready documentation.
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- INDUSTRIES -->
-      <div id="industries" class="section">
-        <div class="container">
-          <h2>Industries</h2>
-          <p class="lead">One platform, configured for three operational worlds.</p>
+    <!-- USE CASES -->
+    <div id="usecases" class="section">
+      <div class="container">
+        <h2>Common Use Cases</h2>
+        <p class="lead">Built around real operational pain points: delays, downtime, audits, and cost control.</p>
 
-          <div class="grid3">
-            <div class="box">
-              <h3>Ground Support Equipment (GSE)</h3>
-              <p>
-                Tow tractors, GPUs, loaders, belt loaders, tugs, de-icers. Track utilization, gate response,
-                battery/engine health, and automate daily inspections & preventive maintenance.
-              </p>
-            </div>
-            <div class="box">
-              <h3>Trucking & Fleet</h3>
-              <p>
-                Trucks, trailers, yard equipment, forklifts. Mileage and service cycles, compliance logs,
-                driver/vehicle events, and predictive downtime reduction.
-              </p>
-            </div>
-            <div class="box">
-              <h3>Aviation MRO</h3>
-              <p>
-                Tools, ground assets, rotable components. Work packages, inspection traceability,
-                parts accountability, calibration tracking, and audit-ready documentation.
-              </p>
-            </div>
+        <div class="grid3">
+          <div class="box">
+            <h3>Reduce Downtime</h3>
+            <p>
+              Detect repeat failures, prioritize critical assets, and trigger maintenance before breakdowns.
+              Improve MTTR with checklists, history, and parts visibility.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Audit & Evidence</h3>
+            <p>
+              Capture photos, readings, signatures, and timestamps. Produce audit evidence instantly with
+              complete traceability per asset.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Multi-site Standardization</h3>
+            <p>
+              Roll out consistent PM templates, safety checks, and approval workflows across locations—while
+              keeping local flexibility where needed.
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- USE CASES -->
-      <div id="usecases" class="section">
-        <div class="container">
-          <h2>Common Use Cases</h2>
-          <p class="lead">Built around real operational pain points: delays, downtime, audits, and cost control.</p>
+    <!-- FEATURES -->
+    <div id="features" class="section">
+      <div class="container">
+        <h2>Key Features</h2>
+        <p class="lead">Enterprise-grade fundamentals now, AI-ready capabilities as you scale.</p>
 
-          <div class="grid3">
-            <div class="box">
-              <h3>Reduce Downtime</h3>
-              <p>
-                Detect repeat failures, prioritize critical assets, and trigger maintenance before breakdowns.
-                Improve MTTR with checklists, history, and parts visibility.
-              </p>
-            </div>
-            <div class="box">
-              <h3>Audit & Evidence</h3>
-              <p>
-                Capture photos, readings, signatures, timestamps. Produce audit evidence instantly with
-                complete traceability per asset.
-              </p>
-            </div>
-            <div class="box">
-              <h3>Multi-site Standardization</h3>
-              <p>
-                Roll out consistent PM templates, safety checks, and approval workflows across locations—while
-                keeping local flexibility where needed.
-              </p>
-            </div>
+        <div class="grid3">
+          <div class="box">
+            <h3>Smart Alerts</h3>
+            <p>
+              Thresholds, fault codes, abnormal behavior patterns, missed inspections, overdue maintenance,
+              SLA risk signals.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Analytics Dashboard</h3>
+            <p>
+              Utilization, downtime, maintenance cost, MTBF/MTTR, compliance completion rates, fleet health scoring.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Workflow Controls</h3>
+            <p>
+              Role-based access, approvals, status transitions, parts reservation, and clear accountability.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:14px;">
+          <b style="color: var(--accent);">Roadmap-ready:</b>
+          <span style="color: var(--muted);">
+            Predictive maintenance scoring, anomaly detection, and real-time operational dashboards (Power BI / embedded analytics).
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div id="security" class="section">
+      <div class="container">
+        <h2>Security & Compliance</h2>
+        <p class="lead">
+          Built for controlled operations: tenant safety, access controls, and evidence capture.
+        </p>
+
+        <div class="two">
+          <div class="box">
+            <h3>ISO-ready Controls</h3>
+            <p>
+              Audit logs, change history, role-based access, approvals, traceability, and evidence capture.
+              Supports ISO 27001/9001-style process discipline.
+            </p>
+          </div>
+          <div class="box">
+            <h3>Deployment Options</h3>
+            <p>
+              Cloud-ready on Azure (Static Web Apps + CDN). Can evolve to App Service + Azure SQL,
+              private networking, and microservices when needed.
+            </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- FEATURES -->
-      <div id="features" class="section">
-        <div class="container">
-          <h2>Key Features</h2>
-          <p class="lead">Enterprise-grade fundamentals now, AI-ready capabilities as you scale.</p>
+    <!-- CONTACT -->
+    <div id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <p class="lead">
+          For demos, partnerships, and pilots: email us and we’ll respond quickly.
+        </p>
 
-          <div class="grid3">
-            <div class="box">
-              <h3>Smart Alerts</h3>
-              <p>
-                Thresholds, fault codes, abnormal behavior patterns, missed inspections, overdue maintenance,
-                SLA risk signals.
-              </p>
-            </div>
-            <div class="box">
-              <h3>Analytics Dashboard</h3>
-              <p>
-                Utilization, downtime, maintenance cost, MTBF/MTTR, compliance completion rates, fleet health scoring.
-              </p>
-            </div>
-            <div class="box">
-              <h3>Workflow Controls</h3>
-              <p>
-                Role-based access, approvals, status transitions, parts reservation, and clear accountability.
-              </p>
-            </div>
+        <div class="two">
+          <div class="box">
+            <h3>Email</h3>
+            <p>
+              <a href="mailto:info@assetops.ca" style="color: var(--accent); font-weight: 900;">info@assetops.ca</a><br />
+              (Change this anytime to your preferred email.)
+            </p>
           </div>
 
-          <div class="callout" style="margin-top:14px;">
-            <b style="color: var(--accent);">Roadmap-ready:</b>
-            <span style="color: var(--muted);">
-              Predictive maintenance scoring, anomaly detection, and real-time operational dashboards (Power BI / embedded analytics).
-            </span>
+          <div class="box">
+            <h3>What to include</h3>
+            <p>
+              Industry (GSE / Trucking / MRO), asset count, location(s), and your goals:
+              downtime reduction, compliance readiness, maintenance cost, or real-time visibility.
+            </p>
           </div>
         </div>
       </div>
-
-      <!-- SECURITY -->
-      <div id="security" class="section">
-        <div class="container">
-          <h2>Security & Compliance</h2>
-          <p class="lead">
-            Built for controlled operations: tenant safety, access controls, and evidence capture.
-          </p>
-
-          <div class="two">
-            <div class="box">
-              <h3>ISO-ready Controls</h3>
-              <p>
-                Audit logs, change history, role-based access, approvals, traceability, and evidence capture.
-                Supports ISO 27001/9001-style process discipline.
-              </p>
-            </div>
-            <div class="box">
-              <h3>Deployment Options</h3>
-              <p>
-                Cloud-ready on Azure (App Service + Azure SQL). Can evolve to private networking,
-                containerization, and microservices when needed.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTACT -->
-      <div id="contact" class="section">
-        <div class="container">
-          <h2>Contact</h2>
-          <p class="lead">
-            For demos, partnerships, and pilots: email us and we’ll respond quickly.
-          </p>
-
-          <div class="two">
-            <div class="box">
-              <h3>Email</h3>
-              <p>
-                <a href="mailto:support@assetops.ca" style="color: var(--accent); font-weight: 900;">support@assetops.ca</a><br />
-                (Change this anytime to your preferred email.)
-              </p>
-            </div>
-
-            <div class="box">
-              <h3>What to include</h3>
-              <p>
-                Industry (GSE / Trucking / MRO), asset count, location(s), and your goals:
-                downtime reduction, compliance readiness, maintenance cost, or real-time visibility.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+    </div>
 
     <!-- FOOTER -->
     <div class="footer">
