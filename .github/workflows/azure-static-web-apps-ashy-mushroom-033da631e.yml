@@ -18,23 +18,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: false
-          lfs: false
 
       - name: Deploy to Azure Static Web Apps (no build)
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # IMPORTANT: This secret must contain the deployment token for YOUR SWA
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ASHY_MUSHROOM_033DA631E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
 
-          # Repo root contains index.html and all assets
+          # Your static site is in the repo root
           app_location: "/"
           api_location: ""
 
-          # Skip Oryx build (this is a pure static site)
+          # This repo is pure static (no Node build / Oryx build)
           skip_app_build: true
           skip_api_build: true
 
@@ -47,5 +43,5 @@ jobs:
       - name: Close PR environment
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ASHY_MUSHROOM_033DA631E }}
           action: close
