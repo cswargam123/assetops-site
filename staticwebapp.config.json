@@ -2,8 +2,7 @@
   "routes": [
     {
       "route": "/*",
-      "redirect": "https://www.assetops.ca",
-      "statusCode": 301
+      "allowedRoles": ["anonymous"]
     }
   ]
 }
