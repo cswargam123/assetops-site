@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 type ModuleKey =
   | "registry"
@@ -94,14 +94,41 @@ export default function App() {
   const year = useMemo(() => new Date().getFullYear(), []);
   const [active, setActive] = useState<ModuleKey>("registry");
   const [videoOpen, setVideoOpen] = useState(false);
+  const [videoKey, setVideoKey] = useState(0); // forces video reset on close
 
+  // ✅ Guarded open/close so nothing navigates
+  const openVideo = (e?: React.SyntheticEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setVideoOpen(true);
+  };
+
+  const closeVideo = (e?: React.SyntheticEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setVideoOpen(false);
+    setVideoKey((k) => k + 1); // reset playback
+  };
+
+  // ESC to close modal
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setVideoOpen(false);
+      if (e.key === "Escape") closeVideo();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (!videoOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [videoOpen]);
 
   const m = modules[active];
 
@@ -111,33 +138,34 @@ export default function App() {
       <div className="topbar">
         <div className="wrap">
           <div className="nav">
+            {/* Keep as <a> so #top works, but it won't interfere with video */}
             <a className="brand" href="#top" aria-label="AssetOps Home">
               <img className="brandWordOnly" src="/AssetOps2.png" alt="AssetOps" />
             </a>
 
             <div className="links" aria-label="Primary navigation">
-              <button className="link" onClick={() => scrollToId("modules")}>
+              <button className="link" type="button" onClick={() => scrollToId("modules")}>
                 Modules
               </button>
-              <button className="link" onClick={() => scrollToId("industries")}>
+              <button className="link" type="button" onClick={() => scrollToId("industries")}>
                 Industries
               </button>
-              <button className="link" onClick={() => scrollToId("usecases")}>
+              <button className="link" type="button" onClick={() => scrollToId("usecases")}>
                 Use Cases
               </button>
-              <button className="link" onClick={() => scrollToId("security")}>
+              <button className="link" type="button" onClick={() => scrollToId("security")}>
                 Security
               </button>
-              <button className="link" onClick={() => scrollToId("contact")}>
+              <button className="link" type="button" onClick={() => scrollToId("contact")}>
                 Contact
               </button>
             </div>
 
             <div className="navCta">
-              <button className="btn ghost" onClick={() => scrollToId("contact")}>
+              <button className="btn ghost" type="button" onClick={() => scrollToId("contact")}>
                 Talk to us
               </button>
-              <button className="btn primary" onClick={() => scrollToId("contact")}>
+              <button className="btn primary" type="button" onClick={() => scrollToId("contact")}>
                 Request a demo
               </button>
             </div>
@@ -149,6 +177,7 @@ export default function App() {
       <div id="top" className="hero">
         <div className="wrap">
           <div className="heroGrid">
+            {/* Left */}
             <div>
               <div className="kicker">
                 <span className="kDot" aria-hidden="true"></span>
@@ -166,13 +195,13 @@ export default function App() {
               </p>
 
               <div className="heroCtas">
-                <button className="btn primary" onClick={() => scrollToId("contact")}>
+                <button className="btn primary" type="button" onClick={() => scrollToId("contact")}>
                   Request a demo
                 </button>
-                <button className="btn" onClick={() => scrollToId("modules")}>
+                <button className="btn" type="button" onClick={() => scrollToId("modules")}>
                   Explore modules
                 </button>
-                <button className="btn" onClick={() => setVideoOpen(true)}>
+                <button className="btn" type="button" onClick={openVideo}>
                   ▶ Watch overview
                 </button>
               </div>
@@ -187,8 +216,73 @@ export default function App() {
                 <div className="chip">✅ Azure-first deployment</div>
                 <div className="chip">✅ Maintenance-first data model</div>
               </div>
+
+              {/* ✅ Fills the empty space under the chips */}
+              <div style={{ marginTop: 14 }}>
+                <div className="grid2">
+                  <div className="panel">
+                    <div className="panelInner">
+                      <h3 style={{ marginTop: 0 }}>How it works</h3>
+                      <div className="steps">
+                        <div className="step">
+                          <div className="n">STEP 1</div>
+                          <b>Register assets</b>
+                          <span>Standardize tag, type, station, status, and ownership.</span>
+                        </div>
+                        <div className="step">
+                          <div className="n">STEP 2</div>
+                          <b>Run maintenance</b>
+                          <span>Create work orders, assign, approve, and capture evidence.</span>
+                        </div>
+                        <div className="step">
+                          <div className="n">STEP 3</div>
+                          <b>Scale with control</b>
+                          <span>Tenant isolation + RBAC + audit logs for compliance-ready ops.</span>
+                        </div>
+                      </div>
+
+                      <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+                        <button className="btn primary" type="button" onClick={() => scrollToId("modules")}>
+                          View modules
+                        </button>
+                        <button className="btn" type="button" onClick={openVideo}>
+                          ▶ Watch overview
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="panel">
+                    <div className="panelInner">
+                      <h3 style={{ marginTop: 0 }}>Outcomes you can measure</h3>
+                      <div className="steps">
+                        <div className="step">
+                          <div className="n">RESULT</div>
+                          <b>Fewer breakdowns</b>
+                          <span>PM discipline and traceable execution reduce downtime.</span>
+                        </div>
+                        <div className="step">
+                          <div className="n">RESULT</div>
+                          <b>Faster turnaround</b>
+                          <span>Assignment + evidence + approvals in one workflow.</span>
+                        </div>
+                        <div className="step">
+                          <div className="n">RESULT</div>
+                          <b>Audit-ready operations</b>
+                          <span>Who/what/when logs for every change and action.</span>
+                        </div>
+                      </div>
+
+                      <div className="fine" style={{ marginTop: 10 }}>
+                        Want this tailored? Tell us your asset types + stations and we’ll propose a rollout plan.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
+            {/* Right */}
             <div className="heroPanel" aria-label="Hero highlights">
               <div className="panelTop">
                 <div>
@@ -200,7 +294,6 @@ export default function App() {
                 <div className="badge">Operations-grade</div>
               </div>
 
-              {/* ✅ Replace big placeholder image with a KPI preview panel (looks “full” immediately) */}
               <div className="heroMedia" aria-label="Product preview">
                 <div className="preview">
                   <div className="previewRow">
@@ -351,7 +444,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* Modules (interactive tabs) */}
+      {/* Modules */}
       <div id="modules" className="section anchor">
         <div className="wrap">
           <div className="head">
@@ -361,28 +454,29 @@ export default function App() {
             </div>
           </div>
 
-        <div className="tabs" role="tablist" aria-label="Modules">
-          {(
-            [
-              ["registry", "Asset Registry"],
-              ["maintenance", "Maintenance"],
-              ["pm", "PM Schedules"],
-              ["inventory", "Inventory"],
-              ["telemetry", "Telemetry"],
-              ["compliance", "Audit/ISO"],
-            ] as Array<[ModuleKey, string]>
-          ).map(([key, label]) => (
-            <button
-              key={key}
-              className={cx("tab", active === key && "tabActive")}
-              onClick={() => setActive(key)}
-              role="tab"
-              aria-selected={active === key}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+          <div className="tabs" role="tablist" aria-label="Modules">
+            {(
+              [
+                ["registry", "Asset Registry"],
+                ["maintenance", "Maintenance"],
+                ["pm", "PM Schedules"],
+                ["inventory", "Inventory"],
+                ["telemetry", "Telemetry"],
+                ["compliance", "Audit/ISO"],
+              ] as Array<[ModuleKey, string]>
+            ).map(([key, label]) => (
+              <button
+                key={key}
+                type="button"
+                className={cx("tab", active === key && "tabActive")}
+                onClick={() => setActive(key)}
+                role="tab"
+                aria-selected={active === key}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
 
           <div className="modulePanel">
             <div className="moduleText">
@@ -395,10 +489,10 @@ export default function App() {
               </ul>
 
               <div className="moduleActions">
-                <button className="btn primary" onClick={() => scrollToId("contact")}>
+                <button className="btn primary" type="button" onClick={() => scrollToId("contact")}>
                   Request a demo
                 </button>
-                <button className="btn" onClick={() => setVideoOpen(true)}>
+                <button className="btn" type="button" onClick={openVideo}>
                   ▶ See it in action
                 </button>
               </div>
@@ -534,7 +628,7 @@ export default function App() {
               </div>
 
               <div className="ctaBtns">
-                <button className="btn primary" onClick={() => setVideoOpen(true)}>
+                <button className="btn primary" type="button" onClick={openVideo}>
                   ▶ Watch overview
                 </button>
 
@@ -626,13 +720,13 @@ export default function App() {
           <div className="foot">
             <div>© {year} AssetOps.ca</div>
             <div className="footLinks">
-              <button className="link" onClick={() => scrollToId("security")}>
+              <button className="link" type="button" onClick={() => scrollToId("security")}>
                 Security
               </button>
-              <button className="link" onClick={() => scrollToId("modules")}>
+              <button className="link" type="button" onClick={() => scrollToId("modules")}>
                 Modules
               </button>
-              <button className="link" onClick={() => scrollToId("contact")}>
+              <button className="link" type="button" onClick={() => scrollToId("contact")}>
                 Contact
               </button>
             </div>
@@ -642,18 +736,33 @@ export default function App() {
 
       {/* Video modal (MP4) */}
       {videoOpen && (
-        <div className="modalBackdrop" role="dialog" aria-modal="true" aria-label="Product overview video">
-          <button className="modalBackdropClick" onClick={() => setVideoOpen(false)} aria-label="Close video" />
-          <div className="modal">
+        <div
+          className="modalBackdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Product overview video"
+          onClick={closeVideo} // click outside closes
+        >
+          {/* Stop clicks inside the modal from closing it */}
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modalBar">
               <div className="modalTitle">AssetOps — Product Overview</div>
-              <button className="modalClose" onClick={() => setVideoOpen(false)}>
+              <button className="modalClose" type="button" onClick={closeVideo}>
                 Close
               </button>
             </div>
 
             <div className="videoBox">
-              <video className="videoPlayer" controls autoPlay playsInline preload="metadata">
+              <video
+                key={videoKey}
+                className="videoPlayer"
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                // This helps prevent “download/open” UX in some browsers
+                controlsList="nodownload noplaybackrate"
+              >
                 <source src="/videos/assetops-overview.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
