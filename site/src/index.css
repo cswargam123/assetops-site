@@ -1,0 +1,53 @@
+/* src/index.css - clean global base for a landing page */
+
+:root {
+  --bg: #070a0f;
+  --text: #eaf0ff;
+  --muted: rgba(234, 240, 255, 0.72);
+
+  font-family: Inter, Sora, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: block;
+  min-width: 320px;
+
+  background: var(--bg);
+  color: var(--text);
+
+  /* Safe defaults for landing pages */
+  overflow-x: hidden;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
